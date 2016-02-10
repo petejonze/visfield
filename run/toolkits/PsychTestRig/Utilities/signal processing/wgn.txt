@@ -1,0 +1,13 @@
+You might consider using the WGN or AWGN functions to generate your white
+noise signals. For more info, type:
+
+    doc wgn
+
+    OR
+
+    doc awgn
+
+at the command prompt.
+
+Once you have your white noise signal, try passing it through a low-pass
+filter to create narrowband noise.

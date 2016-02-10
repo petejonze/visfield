@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spec>
+   <dob>
+      <question>dob?</question>
+      <datatype>date</datatype>
+   </dob>
+   <sex>
+      <question>sex?</question>
+      <datatype>VarChar(1)</datatype>
+   </sex>
+   <initials>
+      <question>initials?</question>
+      <datatype>VarChar(10)</datatype>
+   </initials>
+</spec>

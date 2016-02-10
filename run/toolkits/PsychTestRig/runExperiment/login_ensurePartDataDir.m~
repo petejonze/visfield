@@ -1,0 +1,39 @@
+function isValid=isValidPartID(expID,partID)
+%ISVALIDPARTID description.
+%
+% desc
+%
+% Example: none
+%
+% See also
+% 
+% @Author: Pete R Jones
+% @Date: 22/01/10
+
+
+    %----------------------------------------------------------------------
+    p = inputParser;
+    p.addRequired('expID', @ischar);
+    p.addRequired('partID', @ischar);
+    p.FunctionName = 'STARTNEWDATASESSION';
+    p.parse(expID,partID); % Parse & validate all input args
+    %----------------------------------------------------------------------
+
+    %checks that the data dir exists, if not create it
+    dataDir=[getPrefVal('homeDir') filesep expID filesep 'data'];
+    partDirs=getDirs(dataDir, true);
+    if (~ismember(partID,partDirs)) 
+        %msg = escape(['Participant directory not found: "' dataDir filesep partID '"']);
+        %warning('PsychTestRig:invalidPartID',msg);
+        
+        if getLogicalInput('create directory? (y/n):  ');
+            mkdir([dataDir filesep partID]); 
+        else
+            error('No output dir
+        end
+    end
+    
+end
+
+
+    

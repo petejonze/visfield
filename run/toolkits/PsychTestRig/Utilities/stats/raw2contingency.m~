@@ -1,0 +1,61 @@
+function table = raw2contingency(X)
+    nIVs = size(X,2)-1;
+    DVlevels = unique(X(:,end));
+    nDVlevels = length(DVlevels);
+    
+    IVs = cell(1, nIVs);
+    for i = 1:nIVs
+        IVs{i} = unique(X(:,i));
+    end
+    nIVLevels = cellfun(@length,IVs);
+    totalnIVlevels = sum(nIVLevels);
+    
+    table = cell(totalnIVlevels+2, nIVs+nDVlevels);
+    
+    table{1,end} = 'DV';
+    table(2, 1:nIVs) = strread(sprintf('IV%i\n',1:nIVs),'%s','delimiter','\n');
+    table(2, (nIVs+1):end) = strread(sprintf('%i\n',DVlevels),'%s','delimiter','\n');
+    
+    
+    % tabulate into continency table
+    switch nIVs
+        case 2
+            m = 3;
+            for i = 1:nIVLevels(1)
+                table{m,1} = IVs{1}(i);
+                for j = 1:nIVLevels(2)
+                    table{m,2} = IVs{2}(j);
+                    
+                    idx = X(:,1) == IVs{1}(i) & X(:,2) == IVs{2}(j);
+                    DV = X(idx,3);
+                    for d = 1:nDVlevels
+                        table{m,2+d} = sum(DV==DVlevels(d));
+                    end
+
+                    m = m + 1;
+                end
+            end
+        case 3
+            m = 3;
+            for i = 1:nIVLevels(1)
+                table{m,1} = IVs{1}(i);
+                for j = 1:nIVLevels(2)
+                    table{m,2} = IVs{2}(j);
+                    for k = 1:nIVLevels(3)
+                        table{m,3} = IVs{3}(k);
+
+                        idx = X(:,1) == IVs{1}(i) & X(:,2) == IVs{2}(j) & X(:,3) == IVs{3}(k);
+                        DV = X(idx,4);
+                        for d = 1:nDVlevels
+                            table{m,3+d} = sum(DV==DVlevels(d));
+                        end
+
+                        m = m + 1;
+                    end
+                end
+            end
+        otherwise
+            error('a:b','functionality not yet written');
+    end
+
+end

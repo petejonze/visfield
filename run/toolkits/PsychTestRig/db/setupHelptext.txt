@@ -1,0 +1,38 @@
+installing SQL
+http://www.wikihow.com/Install-the-MySQL-Database-Server-on-Your-Windows-PC
+- but also need to include 'include' and 'lib' [on link below]
+
+
+
+
+matlab to mysql
+http://www.mathworks.com/matlabcentral/fileexchange/8663-mysql-database-connector
+http://www.mmf.utoronto.ca/resrchres/mysql/
+http://social.msdn.microsoft.com/Forums/en-US/vcgeneral/thread/2bfed529-fb6d-48a3-ad48-fc6301486646/
+http://www.mathworks.com/support/solutions/en/data/1-X8A09/index.html?product=ML&solution=1-X8A09
+
+IHR machine:
+1. mex -I'C:\Program Files\MySQL\MySQL Server 5.5\include' -DWIN32 mysql.cpp 'C:\Program Files\MySQL\MySQL Server 5.5\lib\opt\libmysql.lib'
+2.  put mysql.dll in system32
+
+IoO machine:
+1. mex -I'C:\Program Files\MySQL\MySQL Server 5.5\include' -DWIN32 mysql.cpp 'C:\Program Files\MySQL\MySQL Server 5.5\lib\libmysql.lib'
+2.  put mysql.dll in system32
+
+mac 10.6
+1. mex -I/usr/local/mysql-5.5.28-osx10.6-x86/include/ -L/usr/local/mysql-5.5.28-osx10.6-x86/lib/ -lmysqlclient mysql.cpp
+2. In terminal: sudo ln -s /usr/local/mysql-5.5.28-osx10.6-x86/lib/libmysqlclient.18.dylib /usr/lib/libmysqlclient.18.dylib
+
+
+intro to mySQL:http://www.nparikh.org/unix/mysql.php
+
+
+
+csvs?
+http://francisbarnhart.com/blog/2005/01/19/matlab_pain/
+
+
+
+
+
+http://community.sharpdevelop.net/forums/p/116/385.aspx

@@ -1,0 +1,22 @@
+function [p, chi, nDeg] = contTabChi(X)
+    % init
+    nRows = size(X,1) % h
+    nCols = size(X,2) % k
+    nElements = nRows * nCols;
+    nDeg = (nRows-1)*(nCols-1)
+    
+    % calc observed/expected
+    O = nan(nElements, 1)
+    E = nan(nElements, 1)
+    
+    k = 1;
+    for i = 1:nRows
+        rowTotal = sum(X(i,:))
+        for j = 1:nCols
+            colTotal = sum(X(i,:))
+            
+            k = k + 1;
+        end
+    end
+
+end

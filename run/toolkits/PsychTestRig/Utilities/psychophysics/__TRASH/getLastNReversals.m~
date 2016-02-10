@@ -1,0 +1,51 @@
+function [reversalVals,idx] = getLastNReversals(x)
+
+
+
+    changes = sign(diff(dlta));
+    % but only a changes that reverse the direction are reversals
+    lastChange = 0;
+    for i = 1:length(changes)
+        if changes(i) ~= 0
+            
+    %
+    %   INIT
+    %    
+    % get indices for all the cases of reversals, excluding any that may
+    % have happened during a lead-in stage
+    reversalIndex = [rawData.isReversal] & (1-[rawData.wasInLeadInStage]);
+    targetVals = rawData.target_dbSPL;
+    if ~isempty(level_adjustment_coefs)
+        targetVals = polyval(level_adjustment_coefs, targetVals); % adjust
+    end
+    reversalVals = targetVals(reversalIndex==1); % pick out just the vals at the reversals
+    
+    %
+    %   REVERSALS
+    %
+    thresh_maxReversals = NaN;
+	thresh_twoReversals = NaN;
+    thresh_fourReversals = NaN;
+    thresh_eightReversals = NaN;
+    thresh_sixteenReversals = NaN;
+    %
+    nReversals = length(reversalVals);
+    %
+    if nReversals >= 2
+        thresh_twoReversals = mean(reversalVals(end-1:end));
+        thresh_maxReversals = thresh_twoReversals;
+    end
+    if nReversals >= 4
+        thresh_fourReversals = mean(reversalVals(end-3:end));
+        thresh_maxReversals = thresh_fourReversals;
+    end
+    if nReversals >= 8
+        thresh_eightReversals = mean(reversalVals(end-7:end));
+        thresh_maxReversals = thresh_eightReversals;
+    end
+    if nReversals >= 16
+        thresh_sixteenReversals = mean(reversalVals(end-15:end));
+        thresh_maxReversals = thresh_sixteenReversals;
+    end
+    
+end

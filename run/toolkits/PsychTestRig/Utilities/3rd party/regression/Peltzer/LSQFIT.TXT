@@ -1,0 +1,127 @@
+Least squares line fitting:                      by:  Edward T Peltzer, MBARI
+                                                 revised:  2007 Apr 28.
+
+
+Model-1 regressions:
+
+
+        There are four m-files to use in this situation:
+
+                lsqfitx.m  --  X on Y regression  (alternate or reversed regression)
+                lsqfity.m  --  Y on X regression  (standard linear regression)
+                lsqfityw.m  --  weighted-Y on X regression
+                lsqfityz.m  --  weighted-Y on X regression (revised)
+
+
+lsqfitx.m  --   X-on-Y regression.
+
+                ALTERNATE or REVERSED linear regression equation.
+
+                Fit line by minimizing x-residuals only; y-residuals are
+                assumed to be zero or very small.  All data points are given
+                equal weight.
+
+
+lsqfity.m  --   Y-on-X regression.
+
+                STANDARD or COMMON linear regression equation.
+
+                Fit line by minimizing y-residuals only; x-residuals are
+                assumed to be zero or very small.  All data points are given
+                equal weight.
+
+
+lsqfityw.m  --  WEIGHTED regression of a simple linear equation.
+
+                [wY-on-X regression.]
+
+                Fit line by minimizing y-residuals only; x-residuals are
+                assumed to be zero or very small.  Data points are given
+                varying weight.  Uncertainties for slope and intercept
+                seem to be very small compared to those from lsqfity.m.
+
+
+lsqfityz.m  --  WEIGHTED regression of a simple linear equation.
+
+                [wY-on-X regression.]
+
+                This is the same regression as lsqfityw.m EXCEPT York's (1966)
+                equations for the uncertainty in slope and intercept are used.
+                These uncertainties are comparable to those from lsqfity.m.
+
+
+
+
+Model II regressions:
+
+
+        There are four m-files to use in this situation:
+
+                lsqbisec.m  --  determination of the least squares bisector
+                lsqcubic.m  --  weighted determination of the major axis
+                lsqfitgm.m  --  determination of geometric mean
+                lsqfitma.m  --  determination of major axis
+
+
+lsqbisec.m  --  LEAST SQUARES BISECTOR.
+
+                Slope of line is determined by bisecting the minor angle
+                between the two model I regressions: Y-on-X and X-on-Y.
+                The y-intercept is obtained by running the line through the
+                centroid.  All data are given equal weight.
+
+                Use when units or range of X and Y are different.
+
+                This algorithm uses lsqfity.m and lsqfitx.m.  Make sure that
+                the directory containing both of these files is listed in
+                your MATLABPATH.
+
+
+lsqcubic.m  --  LEAST SQUARES CUBIC -- Correlation of wX & wY.
+
+                Weighted correlation of two independent variables.
+
+                Line is fit by minimizing both x- and y-residuals simultane-
+                ously for WEIGHTED data points.  Each data point is given its
+                own weight either as the inverse-square of the measurement
+                precision or as the inverse-square of the relative measurement
+                precision for the method times concentration.
+
+                This algorithm uses lsqfitma.m for the first estimate of slope.
+                Make sure that the directory containing this file is listed in
+                your MATLABPATH.  Iteration proceeds until the change in slope
+                is less than the user defined limit.
+
+
+lsqfitgm.m  --  GEOMETRIC MEAN REGRESSION, aka: the reduced major axis.
+
+                Slope of line is the geometric mean of the two slopes
+                determined by regressing Y-on-X and X-on-Y.  The y-intercept
+                is obtained by running the line through the centroid.
+                All data are given equal weight.
+
+                Use when units or range of X and Y are different.
+
+                This algorithm uses lsqfity.m and lsqfitx.m.  Make sure that
+                the directory containing both of these files is listed in
+                your MATLABPATH.
+
+
+lsqfitma.m  --  MAJOR AXIS, aka: first principal component.
+
+                Line is fit by minimizing BOTH x- and y-residuals simultane-
+                ously.  All data are given equal weight.
+
+                Use when units and range of X and Y are the same.
+
+
+
+
+        For more info regarding Model I and II regressions and correlation
+        analysis, see:
+
+                BIOMETRY, 3rd edition  by  Sokal and Rohlf (1995).
+                  W. H. Freeman and Company, San Francisco, CA.
+
+                MATHEMATICAL METHODS FOR OCEANOGRAPHERS  by  E. A. Laws (1997).
+                  John wiley & Sons, Inc., New York, NY.

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<script>visfield_v2_4_2.m</script>
+	<ptrVersion>0.7</ptrVersion>
+	
+	<params>
+		<gridParams>
+			<dB_max>34</dB_max>
+			<doPlot>false</doPlot>
+			<goldmann>III</goldmann>
+		</gridParams>
+		
+		<stimParams>
+			<screenMargins_deg>[3 1 -3 -1]</screenMargins_deg> <!-- left, top, right, bottom  if blank then defaults to 2 myStimulus diameters, as per http://www.perimetry.org/GEN-INFO/standards/IPS90.HTM -->
+			<maxPlaceAttempts>4</maxPlaceAttempts> <!-- after this point a VfAttentionGrabber will be used to recenter fixation --> 
+			<calibMargins_deg>[3 3 -3 -3]</calibMargins_deg> <!-- left, top, right, bottom. On EIZO, approx equal to: [275 175 2285 1265]-->
+			<stim_cycle_on_secs>0.2</stim_cycle_on_secs> <!-- amount of time for light to be 'on' (per cycle); 200ms is HFA default -->
+			<stim_cycle_off_secs>0.2</stim_cycle_off_secs> <!-- amount of time for light to be 'off' (per cycle) -->
+			<stim_cycle_n>1</stim_cycle_n> <!-- n times to flash the light; 1 is HFA default -->
+			<stim_audio>false</stim_audio> <!-- whether to play audio while stimulus is 'on' -->
+			<additionalGrabberMargins_px>[250 250 -250 -250]</additionalGrabberMargins_px> <!-- left, top, right, bottom -->
+			<minDistFromCentre_px>175</minDistFromCentre_px>
+			<minDistFromTopRight_px>350</minDistFromTopRight_px>
+			<minDistFromTopLeft_px>350</minDistFromTopLeft_px>
+			<useStimRamping>false</useStimRamping>
+		</stimParams>
+		
+		<luxParams>
+			<is10Bit>true</is10Bit>
+			<useBitstealing>false</useBitstealing>
+			<useCompressedGamma>false</useCompressedGamma> <!-- not implemented-->
+			<bkgdLum_cdm2>10</bkgdLum_cdm2> <!--1.2732   4/pi for MP1, Octopus 101 and MAIA; 31.5/pi [10] for Humphrey, Goldmann, TAP/Twinfield, Octopus 300; 10cdm2 seems to be quoted as a 'standard', but doesn't seem to apply for microperimeters, where the standard appears to be 1.27 -->
+			<deltaLum_min_cdm2>0.076122</deltaLum_min_cdm2> <!-- n.b., deltaLum is *added* to the background pedestal(!) -->
+			<deltaLum_max_cdm2>225</deltaLum_max_cdm2>  <!-- i.e., so with a background of 10 cd/m2, screen must be capable of at least 260 cd/m2 at every location -->
+			<maxAbsLum_cdm2>235</maxAbsLum_cdm2> <!-- luxParams.bkgdLum_cdm2 + luxParams.deltaLum_max_cdm2 -->
+			<screenCalibRaw>visfield_calib_getRawData_v1_20150708T144816.mat</screenCalibRaw>
+			<screenCalibFittedBgd>visfield_calib_backgroundMatrix-20150715T024235</screenCalibFittedBgd>
+		</luxParams>
+
+		<graphicParams>
+			<screenNum>1</screenNum>
+			<Fr>60</Fr>
+			<screenWidth_px>2560</screenWidth_px> <!-- 1920 2560 -->
+			<screenHeight_px>1440</screenHeight_px> <!-- 1080 1440 1600 -->
+			<screenWidth_cm>59.7</screenWidth_cm> <!-- 64, 59.7 -->
+			<screenHeight_cm>33.6</screenHeight_cm> <!-- 36, 33.6 -->
+			<assumedViewingDistance_cm>60</assumedViewingDistance_cm> <!-- distance to MONITOR (includes tracker offset). N.B. given a 64 cm wide monitor, 65 would give 52.4 x 32.8 DVA -->
+			<useGUI>false</useGUI>
+		</graphicParams>
+
+		<paradigm>
+			<maxNTestTrials>600</maxNTestTrials> 
+			<videoAfterNTrials>130</videoAfterNTrials> 
+			<suppressVideoOnTrial1>true</suppressVideoOnTrial1> 	<!-- NB now shows anyway as part of distance calibration, just prior to trial 1 -->
+			<showTrackBoxDuringVid>true</showTrackBoxDuringVid> 
+			<runIntroCalib>true</runIntroCalib> 					<!-- !!! -->
+			<nSecsRqdToBreakVid>3</nSecsRqdToBreakVid> 
+			<trialInitContactThreshold_secs>2.5</trialInitContactThreshold_secs>  <!-- ???????? -->
+			<delayMin_secs>.2</delayMin_secs>
+			<delaySigma_secs>.1</delaySigma_secs> 
+			<delayMax_secs>.5</delayMax_secs> 	
+			<trialDuration_secs>1.5</trialDuration_secs> 
+			<attentionGrabberType>VfAttentionGrabberFace</attentionGrabberType> 
+			<refixationType>controltrial</refixationType> <!-- 'animalsprite', 'controltrial' -->
+			<rewarder_type>coin</rewarder_type> <!-- 'coin', 'animalsprite' -->
+			<rewarder_duration_secs>.1</rewarder_duration_secs> 
+			<rewarder_playGraphics>true</rewarder_playGraphics> 
+			<rewarder_playAudio>true</rewarder_playAudio> 
+			<rewarder_isColour>false</rewarder_isColour>
+			<stationarity_nPoints>10</stationarity_nPoints>
+			<stationarity_criterion_degsec>60</stationarity_criterion_degsec> <!-- 125 -->
+		</paradigm>
+
+		<eyeParams>
+			<ivisVersion>1.5</ivisVersion>
+			<npoints>10</npoints>
+			<relaxClassifierAfterNdegs>5</relaxClassifierAfterNdegs>
+			<maxPathDeviation_px>400</maxPathDeviation_px> <!-- 100 -->
+			<boxdims_uncalibrated_deg>[2.5 2.5]</boxdims_uncalibrated_deg> <!-- 2.5 = 121 px at 60 cm viewing distance (on Eizo))-->
+			<boxdims_calibrated_deg>[2 2]</boxdims_calibrated_deg> <!-- 1.25 = 60 px at 60 cm viewing distance (on Eizo))-->
+			<type>IvTobiiEyeX</type> <!-- 'IvTobiiEyeX', 'tobii', 'mouse' -->
+			<eye>1</eye> <!-- 0==left, 1==right, 2==both -->
+			<driftCorrectionWeight>.15</driftCorrectionWeight>
+			<calibration_range_criterion_px>[600 400]</calibration_range_criterion_px>
+			<recalib_falseNegativeLim>0.20</recalib_falseNegativeLim>
+			<recalib_afterNTrials>390</recalib_afterNTrials>
+			<calibrateDistanceAtStart>true</calibrateDistanceAtStart> 	<!-- !!! -->
+		</eyeParams>
+
+		<audioParams>
+			<devID></devID>
+			<playBackground>false</playBackground>
+			<nTracksToQueue>3</nTracksToQueue>
+			<resetAfterNTrials>3</resetAfterNTrials> <!-- if Inf, then only at start, and after videos (always restarted after videos) -->
+		</audioParams>
+
+	</params>
+</config>

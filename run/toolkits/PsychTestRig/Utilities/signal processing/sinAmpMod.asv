@@ -1,0 +1,46 @@
+function y=sinAmpMod(x,Fs,mFreq,mDepth)
+% SINAMPMOD Sinusoidally amplitude modulate the input vector, x.
+%
+%   <Further Info>
+%
+% @Parameters:  
+%
+%       y       	Real      Input signal vector (time-domain)
+%
+% @Returns:  
+%
+%    	y       	Real      Output signal vector (time-domain)
+%
+% @Usage:           ####  
+% @Example:         ####
+%
+% @Requires:        PsychTestRig
+%   
+% @See also:        #####
+%
+% @Matlab:          v2008 onwards
+%
+% @Author(S):    	Pete R Jones
+%
+% @Creation Date:	14/06/2012
+% @Last Update:     14/06/2012
+%
+% @Current Verion:  1.0.0
+% @Version History: v1.0.0	14/06/2012    Initial build.
+%
+% @Todo:            ####
+    
+    % init
+    n = length(x);                              % number of samples
+
+    % set modulator
+    t = (0:(n-1)) / Fs;                         % modulator data preparation
+    m = 1 + mDepth * sin(2 * pi * mFreq * t);   % sinusoidal modulation depth [between 0 and 1]
+
+    % apply modulator
+    y = m .* x;                                 % perform amplitude modulation
+    
+    % apply amplitude compensation
+    y = y / (1 + (m^2)/2)^(1/2); % see 
+
+end
